@@ -113,12 +113,12 @@ PageLogAnalysis::PageLogAnalysis(QWidget *parent) :
         }
     };
 
-    addDataItem("Speed VESC");      // 0
+    addDataItem("Speed ESC");      // 0
     addDataItem("Speed GNSS");      // 1
     addDataItem("Time of Day", false);     // 2
     addDataItem("Time of trip", false);    // 3
-    addDataItem("Trip VESC");       // 4
-    addDataItem("Trip ABS VESC");   // 5
+    addDataItem("Trip ESC");       // 4
+    addDataItem("Trip ABS ESC");   // 5
     addDataItem("Trip GNSS");       // 6
     addDataItem("Current Motors");  // 7
     addDataItem("Current Battery"); // 8
@@ -164,7 +164,7 @@ PageLogAnalysis::PageLogAnalysis(QWidget *parent) :
     addDataItem("Longitude");       // 48
     addDataItem("V. Speed GNSS");   // 49
     addDataItem("GNSS V. Acc.");    // 50
-    addDataItem("VESC num");        // 51
+    addDataItem("ESC num");        // 51
 
     mVerticalLine = new QCPCurve(ui->plot->xAxis, ui->plot->yAxis);
     mVerticalLine->removeFromLegend();
@@ -277,7 +277,7 @@ void PageLogAnalysis::on_openCsvButton_clicked()
                                                         tr("Load CSV File"), "",
                                                         tr("CSV files (*.csv)"));
 
-        if (!fileName.isEmpty()) {            
+        if (!fileName.isEmpty()) {
             QSettings set;
             set.setValue("pageloganalysis/lastdir",
                          QFileInfo(fileName).absolutePath());
@@ -468,7 +468,7 @@ void PageLogAnalysis::updateGraphs()
             if (row == 0) {
                 if (yAxes.size() <= rowInd) yAxes.append(QVector<double>());
                 yAxes[rowInd].append(d.setupValues.speed * 3.6 * rowScale);
-                names.append(QString("Speed VESC (km/h * %1)").arg(rowScale));
+                names.append(QString("Speed ESC (km/h * %1)").arg(rowScale));
                 rowInd++;
             } else if (row == 1) {
                 if (yAxes.size() <= rowInd) yAxes.append(QVector<double>());
@@ -479,13 +479,13 @@ void PageLogAnalysis::updateGraphs()
                 if (yAxes.size() <= rowInd) yAxes.append(QVector<double>());
                 yAxes[rowInd].append((d.setupValues.tachometer -
                                       firstData.setupValues.tachometer) * rowScale);
-                names.append(QString("Trip VESC (m * %1)").arg(rowScale));
+                names.append(QString("Trip ESC (m * %1)").arg(rowScale));
                 rowInd++;
             } else if (row == 5) {
                 if (yAxes.size() <= rowInd) yAxes.append(QVector<double>());
                 yAxes[rowInd].append((d.setupValues.tachometer_abs -
                                       firstData.setupValues.tachometer_abs) * rowScale);
-                names.append(QString("Trip ABS VESC (m * %1)").arg(rowScale));
+                names.append(QString("Trip ABS ESC (m * %1)").arg(rowScale));
                 rowInd++;
             } else if (row == 6) {
                 if (yAxes.size() <= rowInd) yAxes.append(QVector<double>());
@@ -715,7 +715,7 @@ void PageLogAnalysis::updateGraphs()
             } else if (row == 51) {
                 if (yAxes.size() <= rowInd) yAxes.append(QVector<double>());
                 yAxes[rowInd].append(double(d.setupValues.num_vescs) * rowScale);
-                names.append(QString("VESC num (* %1)").arg(rowScale));
+                names.append(QString("ESC num (* %1)").arg(rowScale));
                 rowInd++;
             }
         }

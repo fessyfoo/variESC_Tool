@@ -80,8 +80,8 @@ public class VForegroundService extends Service {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String channelId = "VESC_CHANNEL";
-            NotificationChannel channel = new NotificationChannel(channelId, "VESC", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("VESC GNSS");
+            NotificationChannel channel = new NotificationChannel(channelId, "ESC", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("ESC GNSS");
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
             builder = new Notification.Builder(this, channelId);
@@ -89,8 +89,8 @@ public class VForegroundService extends Service {
             builder = new Notification.Builder(this);
         }
 
-        builder.setContentTitle("VESC Tool GNSS");
-        builder.setContentText("VESC Tool is keeping GNSS alive.");
+        builder.setContentTitle("ESC Tool GNSS");
+        builder.setContentText("variESC Tool is keeping GNSS alive.");
 
         builder.setWhen(System.currentTimeMillis());
         builder.setSmallIcon(R.drawable.icon);

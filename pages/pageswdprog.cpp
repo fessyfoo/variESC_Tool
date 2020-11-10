@@ -198,7 +198,7 @@ void PageSwdProg::on_uploadButton_clicked()
         if (!mVesc->isPortConnected()) {
             QMessageBox::critical(this,
                                   tr("Connection Error"),
-                                  tr("The VESC is not connected."));
+                                  tr("The ESC is not connected."));
             return;
         }
 
@@ -488,7 +488,7 @@ void PageSwdProg::on_eraseFlashButton_clicked()
         if (!mVesc->isPortConnected()) {
             QMessageBox::critical(this,
                                   tr("Connection Error"),
-                                  tr("The VESC is not connected."));
+                                  tr("The ESC is not connected."));
             return;
         }
 

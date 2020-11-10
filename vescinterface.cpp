@@ -103,7 +103,7 @@ VescInterface::VescInterface(QObject *parent) : QObject(parent)
             if (powerMgr.isValid()) {
                 jint levelAndFlags = QAndroidJniObject::getStaticField<jint>(
                             "android/os/PowerManager","PARTIAL_WAKE_LOCK");
-                QAndroidJniObject tag = QAndroidJniObject::fromString( "VESC Tool" );
+                QAndroidJniObject tag = QAndroidJniObject::fromString( "variESC Tool" );
                 mWakeLock = powerMgr.callObjectMethod("newWakeLock",
                                                        "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;",
                                                        levelAndFlags,tag.object<jstring>());
@@ -420,14 +420,14 @@ VescInterface::VescInterface(QObject *parent) : QObject(parent)
 #if VT_IS_TEST_VERSION
             emitMessageDialog("Deserializing " + configName + " configuration failed",
                               "Could not deserialize " + configName +
-                              " configuration. You probably need to update the VESC firmware, as "
+                              " configuration. You probably need to update the ESC firmware, as "
                               "a new iteration of the test version has been made.",
                               false, false);
 #else
             emitMessageDialog("Deserializing " + configName + " configuration failed",
                               "Could not deserialize " + configName +
                               " configuration. This probably means "
-                              "that something is wrong with your firmware, or this VESC Tool version.",
+                              "that something is wrong with your firmware, or this variESC Tool version.",
                               false, false);
 #endif
         }
@@ -435,10 +435,10 @@ VescInterface::VescInterface(QObject *parent) : QObject(parent)
 
 #if VT_IS_TEST_VERSION
     QTimer::singleShot(1000, [this]() {
-        emitMessageDialog("VESC Tool Test Version",
-                          "Warning: This is a test version of VESC Tool. The included firmwares are NOT compatible with "
+        emitMessageDialog("variESC Tool Test Version",
+                          "Warning: This is a test version of variESC Tool. The included firmwares are NOT compatible with "
                           "released firmwares and should only be used with this test version. When using a release version "
-                          "of VESC Tool, the firmware must be upgraded even if the version number is the same.",
+                          "of variESC Tool, the firmware must be upgraded even if the version number is the same.",
                           false);
     });
 #endif
@@ -763,15 +763,15 @@ bool VescInterface::addPairedUuid(QString uuid)
 
     QRegularExpressionMatch match = hexMatcher.match(uuid);
     if (!match.hasMatch()) {
-        emitMessageDialog("Add VESC",
+        emitMessageDialog("Add ESC",
                           "The UUID must consist of 24 hexadecimal characters.",
                           false, false);
         return false;
     }
 
     if (hasPairedUuid(uuid)) {
-        emitMessageDialog("Add VESC",
-                          "This VESC already is in your paired UUID list.",
+        emitMessageDialog("Add ESC",
+                          "This ESC already is in your paired UUID list.",
                           true, false);
     } else {
         mPairedUuids.append(uuid);
@@ -1207,7 +1207,7 @@ bool VescInterface::fwUpload(QByteArray &newFirmware, bool isBootloader, bool fw
         if (mCommands->getSendCan()) {
             emitMessageDialog("Firmware Upload",
                               "CAN forwarding must be disabled when uploading firmware to "
-                              "all VESCs at the same time.", false, false);
+                              "all ESCs at the same time.", false, false);
             mFwUploadStatus = "CAN check failed";
             mFwUploadProgress = -1.0;
             emit fwUploadStatus(mFwUploadStatus, mFwUploadProgress, false);
@@ -1238,7 +1238,7 @@ bool VescInterface::fwUpload(QByteArray &newFirmware, bool isBootloader, bool fw
                 Utility::getFwVersionBlocking(this, &fwParamsCan);
                 if (fwParamsLocal.hw != fwParamsCan.hw) {
                     emitMessageDialog("Firmware Upload",
-                                      "All VESCs on the CAN-bus must have the same hardware version to upload "
+                                      "All ESCs on the CAN-bus must have the same hardware version to upload "
                                       "firmware to all of them at the same time. You must update them individually.",
                                       false, false);
                     mCommands->setSendCan(false);
@@ -2148,7 +2148,7 @@ bool VescInterface::connectSerial(QString port, int baudrate)
     (void)baudrate;
     emit messageDialog(tr("Connect serial"),
                        tr("Serial port support is not enabled in this build "
-                          "of VESC Tool."),
+                          "of variESC Tool."),
                        false, false);
     return false;
 #endif
@@ -2261,7 +2261,7 @@ bool VescInterface::connectCANbus(QString backend, QString interface, int bitrat
     (void)bitrate;
     emit messageDialog(tr("Connect serial"),
                        tr("CAN bus support is not enabled in this build "
-                          "of VESC Tool."),
+                          "of variESC Tool."),
                        false, false);
     return false;
 #endif
@@ -2760,7 +2760,7 @@ void VescInterface::timerSlot()
                         emit statusMessage(tr("No firmware read response"), false);
                         emit messageDialog(tr("Read Firmware Version"),
                                            tr("Could not read firmware version. Make sure that "
-                                              "the selected port really belongs to the VESC. "),
+                                              "the selected port really belongs to the ESC. "),
                                            false, false);
                         disconnectPort();
                     }
@@ -2790,12 +2790,12 @@ void VescInterface::timerSlot()
                 if (mIsLastFwBootloader) {
                     emitMessageDialog("Bootloader Upload",
                                       "Bootloader upload finished! You can now upload new firmware "
-                                      "to the VESC.",
+                                      "to the ESC.",
                                       true, false);
                 } else {
                     disconnectPort();
                     emitMessageDialog("Firmware Upload",
-                                      "Firmware upload finished! Give the VESC around 10 "
+                                      "Firmware upload finished! Give the ESC around 10 "
                                       "seconds to apply the firmware and reboot, then reconnect.",
                                       true, false);
                 }
@@ -2979,10 +2979,10 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
         if (params.isPaired && !hasPairedUuid(mUuidStr)) {
             disconnectPort();
             emitMessageDialog("Pairing",
-                              "This VESC is not paired to your local version of VESC Tool. You can either "
+                              "This ESC is not paired to your local version of variESC Tool. You can either "
                               "add the UUID to the pairing list manually, or connect over USB and set the app "
-                              "pairing flag to false for this VESC. Then you can pair to this version of VESC "
-                              "tool, or leave the VESC unpaired.",
+                              "pairing flag to false for this ESC. Then you can pair to this version of variESC "
+                              "tool, or leave the ESC unpaired.",
                               false, false);
             return;
         }
@@ -2999,7 +2999,7 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
 
     if (fwPairs.isEmpty()) {
         emit messageDialog(tr("No Supported Firmwares"),
-                           tr("This version of VESC Tool does not seem to have any supported "
+                           tr("This version of variESC Tool does not seem to have any supported "
                               "firmwares. Something is probably wrong with the motor configuration "
                               "file."),
                            false, false);
@@ -3168,16 +3168,16 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
         updateFwRx(false);
         mFwRetries = 0;
         disconnectPort();
-        emit messageDialog(tr("Error"), tr("The firmware on the connected VESC is too old. Please"
+        emit messageDialog(tr("Error"), tr("The firmware on the connected ESC is too old. Please"
                                            " update it using a programmer."), false, false);
     } else if (fw_connected > highest_supported) {
         mCommands->setLimitedMode(true);
         updateFwRx(true);
         if (!wasReceived) {
-            emit messageDialog(tr("Warning"), tr("The connected VESC has newer firmware than this version of"
-                                                " VESC Tool supports. It is recommended that you update VESC "
+            emit messageDialog(tr("Warning"), tr("The connected ESC has newer firmware than this version of"
+                                                " variESC Tool supports. It is recommended that you update variESC "
                                                 " Tool to the latest version. Alternatively, the firmware on"
-                                                " the connected VESC can be downgraded in the firmware page."
+                                                " the connected ESC can be downgraded in the firmware page."
                                                 " Until then, limited communication mode will be used."), false, false);
         }
     } else if (!fwPairs.contains(fw_connected)) {
@@ -3186,7 +3186,7 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
             updateFwRx(true);
             if (!wasReceived) {
                 if (mFwSupportsConfiguration) {
-                    emit messageDialog(tr("Warning"), tr("The connected VESC has old, but mostly compatible firmware. This is fine if "
+                    emit messageDialog(tr("Warning"), tr("The connected ESC has old, but mostly compatible firmware. This is fine if "
                                                          "your setup works properly.<br><br>"
                                                          "Check out the firmware changelog (from the help menu) to decide if you want to "
                                                          "use some of the new features that have been added after your firmware version. "
@@ -3194,8 +3194,8 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
                                                          "it after the upgrade and carefully make sure that everything works as expected."),
                                        false, false);
                 } else {
-                    emit messageDialog(tr("Warning"), tr("The connected VESC has too old firmware. Since the"
-                                                         " connected VESC has firmware with bootloader support, it can be"
+                    emit messageDialog(tr("Warning"), tr("The connected ESC has too old firmware. Since the"
+                                                         " connected ESC has firmware with bootloader support, it can be"
                                                          " updated from the Firmware page."
                                                          " Until then, limited communication mode will be used."), false, false);
                 }
@@ -3205,7 +3205,7 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
             mFwRetries = 0;
             disconnectPort();
             if (!wasReceived) {
-                emit messageDialog(tr("Error"), tr("The firmware on the connected VESC is too old. Please"
+                emit messageDialog(tr("Error"), tr("The firmware on the connected ESC is too old. Please"
                                                    " update it using a programmer."), false, false);
             }
         }
@@ -3213,13 +3213,13 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
         updateFwRx(true);
         if (fw_connected < highest_supported) {
             if (!wasReceived) {
-                emit messageDialog(tr("Warning"), tr("The connected VESC has compatible, but old"
+                emit messageDialog(tr("Warning"), tr("The connected ESC has compatible, but old"
                                                     " firmware. It is recommended that you update it."), false, false);
             }
         }
 
         QString fwStr;
-        fwStr.sprintf("VESC Firmware Version %d.%d", params.major, params.minor);
+        fwStr.sprintf("ESC Firmware Version %d.%d", params.major, params.minor);
         if (!params.hw.isEmpty()) {
             fwStr += ", Hardware: " + params.hw;
         }
@@ -3255,7 +3255,7 @@ void VescInterface::fwVersionReceived(FW_RX_PARAMS params)
 
     if (params.isTestFw > 0 && !VT_IS_TEST_VERSION) {
         emitMessageDialog("Test Firmware",
-                          "The connected VESC has test firmware, and this is not a test build of VESC Tool. You should "
+                          "The connected ESC has test firmware, and this is not a test build of variESC Tool. You should "
                           "update the firmware urgently, as this is not a safe situation.",
                           false, false);
     }
@@ -3360,7 +3360,7 @@ bool VescInterface::getFwSupportsConfiguration() const
 bool VescInterface::confStoreBackup(bool can, QString name)
 {
     if (!isPortConnected()) {
-        emitMessageDialog("Backup Configuration", "The VESC must be connected to perform this operation.", false, false);
+        emitMessageDialog("Backup Configuration", "The ESC must be connected to perform this operation.", false, false);
         return false;
     }
 
@@ -3436,7 +3436,7 @@ bool VescInterface::confStoreBackup(bool can, QString name)
         }
 
         emitMessageDialog("Backup Configuration",
-                          "Configuration backup successful for the following VESC UUIDs:\n" + uuidsStr,
+                          "Configuration backup successful for the following ESC UUIDs:\n" + uuidsStr,
                           true, false);
     }
 
@@ -3446,7 +3446,7 @@ bool VescInterface::confStoreBackup(bool can, QString name)
 bool VescInterface::confRestoreBackup(bool can)
 {
     if (!isPortConnected()) {
-        emitMessageDialog("Restore Configuration", "The VESC must be connected to perform this operation.", false, false);
+        emitMessageDialog("Restore Configuration", "The ESC must be connected to perform this operation.", false, false);
         return false;
     }
 
@@ -3552,7 +3552,7 @@ bool VescInterface::confRestoreBackup(bool can)
             }
 
             emitMessageDialog("Restore Configuration",
-                              "Configuration restoration successful for the following VESC UUIDs:\n" + uuidsStr,
+                              "Configuration restoration successful for the following ESC UUIDs:\n" + uuidsStr,
                               true, false);
         }
 

@@ -369,7 +369,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->leftSplitter->setSizes(QList<int>({1000, 80}));
 
-    mPageDebugPrint->printConsole("VESC® Tool " + mVersion + " started<br>");
+    mPageDebugPrint->printConsole("variESC Tool " + mVersion + " started<br>");
 }
 
 MainWindow::~MainWindow()
@@ -662,8 +662,8 @@ void MainWindow::timerSlot()
         if (!mSettings.value("intro_done").toBool()) {
             QMessageBox::critical(this,
                                   tr("Warning"),
-                                  tr("You have not finished the VESC Tool introduction. You must do that "
-                                     "in order to use VESC Tool."));
+                                  tr("You have not finished the variESC Tool introduction. You must do that "
+                                     "in order to use variESC Tool."));
             QCoreApplication::quit();
         }
 
@@ -958,7 +958,7 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, "VESC Tool", Utility::aboutText());
+    QMessageBox::about(this, "variESC Tool", Utility::aboutText());
 }
 
 void MainWindow::on_actionLibrariesUsed_triggered()
@@ -1202,7 +1202,7 @@ void MainWindow::reloadPages()
     mPageAppNunchuk = new PageAppNunchuk(this);
     mPageAppNunchuk->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageAppNunchuk);
-    addPageItem(tr("VESC Remote"), "://res/icons/icons8-fantasy-96.png",
+    addPageItem(tr("variESC Remote"), "://res/icons/icons8-fantasy-96.png",
                 "://res/icons/appconf.png", false, true);
     mPageNameIdList.insert("app_vescremote", ui->pageList->count() - 1);
 
@@ -1288,7 +1288,7 @@ void MainWindow::reloadPages()
     mPageTerminal = new PageTerminal(this);
     mPageTerminal->setVesc(mVesc);
     ui->pageWidget->addWidget(mPageTerminal);
-    addPageItem(tr("VESC Terminal"), "://res/icons/Console-96.png", "", true);
+    addPageItem(tr("ESC Terminal"), "://res/icons/Console-96.png", "", true);
 
     mPageSwdProg = new PageSwdProg(this);
     mPageSwdProg->setVesc(mVesc);
@@ -1373,9 +1373,9 @@ void MainWindow::checkUdev()
             reply = QMessageBox::information(this,
                                              tr("Modemmenager"),
                                              tr("It looks like modemmanager is installed on your system, and that "
-                                                "there are no VESC udev rules installed. This will cause a delay "
-                                                "from when you plug in the VESC until you can use it. Would you like "
-                                                "to add a udev rule to prevent modemmanager from grabbing the VESC?"),
+                                                "there are no variESC udev rules installed. This will cause a delay "
+                                                "from when you plug in the ESC until you can use it. Would you like "
+                                                "to add a udev rule to prevent modemmanager from grabbing the ESC?"),
                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
             if (reply == QMessageBox::Yes) {
@@ -1387,7 +1387,7 @@ void MainWindow::checkUdev()
                     return;
                 }
 
-                f_vesc.write("# Prevent modemmanager from grabbing the VESC\n"
+                f_vesc.write("# Prevent modemmanager from grabbing the ESC\n"
                              "ATTRS{idVendor}==\"0483\", ATTRS{idProduct}==\"5740\", ENV{ID_MM_DEVICE_IGNORE}=\"1\"\n");
                 f_vesc.close();
 
@@ -1542,25 +1542,25 @@ void MainWindow::on_actionSaveAppConfigurationHeaderWrap_triggered()
 void MainWindow::on_actionTerminalPrintFaults_triggered()
 {
     mVesc->commands()->sendTerminalCmd("faults");
-    showPage("VESC Terminal");
+    showPage("ESC Terminal");
 }
 
 void MainWindow::on_actionTerminalShowHelp_triggered()
 {
     mVesc->commands()->sendTerminalCmd("help");
-    showPage("VESC Terminal");
+    showPage("ESC Terminal");
 }
 
 void MainWindow::on_actionTerminalClear_triggered()
 {
     mPageTerminal->clearTerminal();
-    showPage("VESC Terminal");
+    showPage("ESC Terminal");
 }
 
 void MainWindow::on_actionTerminalPrintThreads_triggered()
 {
     mVesc->commands()->sendTerminalCmd("threads");
-    showPage("VESC Terminal");
+    showPage("ESC Terminal");
 }
 
 void MainWindow::on_actionTerminalDRVResetLatchedFaults_triggered()
@@ -1595,7 +1595,7 @@ void MainWindow::on_actionWarrantyStatement_triggered()
 
 void MainWindow::on_actionVESCToolChangelog_triggered()
 {
-    HelpDialog::showHelp(this, "VESC® Tool Changelog", Utility::vescToolChangeLog());
+    HelpDialog::showHelp(this, "variESC Tool Changelog", Utility::vescToolChangeLog());
 }
 
 void MainWindow::on_actionFirmwareChangelog_triggered()
@@ -1605,7 +1605,7 @@ void MainWindow::on_actionFirmwareChangelog_triggered()
 
 void MainWindow::on_actionVESCProjectForums_triggered()
 {
-    QDesktopServices::openUrl(QUrl("http://vesc-project.com/forum"));
+    QDesktopServices::openUrl(QUrl("http://variESC.com/forum"));
 }
 
 void MainWindow::on_actionLicense_triggered()
@@ -1661,7 +1661,7 @@ void MainWindow::on_actionClearConfigurationBackups_triggered()
     reply = QMessageBox::warning(this,
                                  tr("Warning"),
                                  tr("This is going to remove all configuration backups for "
-                                    "this instance of VESC Tool. Continue?"),
+                                    "this instance of variESC Tool. Continue?"),
                                  QMessageBox::Yes | QMessageBox::Cancel);
 
     if (reply == QMessageBox::Yes) {
@@ -1708,7 +1708,7 @@ void MainWindow::on_scanCanButton_clicked()
         ui->canList->clear();
     } else {
         ui->canList->clear();
-        showStatusInfo("Connect to VESC before scanning", false);
+        showStatusInfo("Connect to ESC before scanning", false);
     }
 }
 

@@ -235,7 +235,7 @@ void PageConnection::pingCanRx(QVector<int> devs, bool isTimeout)
 
     ui->canFwdBox->clear();
     for (int dev: devs) {
-        ui->canFwdBox->addItem(QString("VESC %1").arg(dev), dev);
+        ui->canFwdBox->addItem(QString("ESC %1").arg(dev), dev);
     }
 }
 
@@ -453,7 +453,7 @@ void PageConnection::on_canDefaultButton_clicked()
 {
     ui->canFwdBox->clear();
     for (int dev = 0;dev < 255;dev++) {
-        ui->canFwdBox->addItem(QString("VESC %1").arg(dev), dev);
+        ui->canFwdBox->addItem(QString("ESC %1").arg(dev), dev);
     }
 }
 
@@ -462,15 +462,15 @@ void PageConnection::on_pairConnectedButton_clicked()
     if (mVesc) {
         if (mVesc->isPortConnected()) {
             if (mVesc->commands()->isLimitedMode()) {
-                mVesc->emitMessageDialog("Pair VESC",
-                                         "The fiwmare must be updated to pair this VESC.",
+                mVesc->emitMessageDialog("Pair ESC",
+                                         "The fiwmare must be updated to pair this ESC.",
                                          false, false);
             } else {
                 QMessageBox::StandardButton reply;
                 reply = QMessageBox::warning(this,
-                                             tr("Pair connected VESC"),
-                                             tr("This is going to pair the connected VESC with this instance of VESC Tool. VESC Tool instances "
-                                                "that are not paired with this VESC will not be able to connect over bluetooth any more. Continue?"),
+                                             tr("Pair connected ESC"),
+                                             tr("This is going to pair the connected ESC with this instance of variESC Tool. variESC Tool instances "
+                                                "that are not paired with this ESC will not be able to connect over bluetooth any more. Continue?"),
                                              QMessageBox::Ok | QMessageBox::Cancel);
                 if (reply == QMessageBox::Ok) {
                     mVesc->addPairedUuid(mVesc->getConnectedUuid());
@@ -486,8 +486,8 @@ void PageConnection::on_pairConnectedButton_clicked()
                 }
             }
         } else {
-            mVesc->emitMessageDialog("Pair VESC",
-                                     "You are not connected to the VESC. Connect in order to pair it.",
+            mVesc->emitMessageDialog("Pair ESC",
+                                     "You are not connected to the ESC. Connect in order to pair it.",
                                      false, false);
         }
     }
@@ -501,7 +501,7 @@ void PageConnection::on_addConnectedButton_clicked()
             mVesc->storeSettings();
         } else {
             mVesc->emitMessageDialog("Add UUID",
-                                     "You are not connected to the VESC. Connect in order to add it.",
+                                     "You are not connected to the ESC. Connect in order to add it.",
                                      false, false);
         }
     }
@@ -515,8 +515,8 @@ void PageConnection::on_deletePairedButton_clicked()
         if (item) {
             QMessageBox::StandardButton reply;
             reply = QMessageBox::warning(this,
-                                         tr("Delete paired VESC"),
-                                         tr("This is going to delete this VESC from the paired list. If that VESC "
+                                         tr("Delete paired ESC"),
+                                         tr("This is going to delete this ESC from the paired list. If that ESC "
                                             "has the pairing flag set you won't be able to connect to it over BLE "
                                             "any more. Are you sure?"),
                                          QMessageBox::Ok | QMessageBox::Cancel);
@@ -536,8 +536,8 @@ void PageConnection::on_clearPairedButton_clicked()
         if (item) {
             QMessageBox::StandardButton reply;
             reply = QMessageBox::warning(this,
-                                         tr("Clear paired VESCs"),
-                                         tr("This is going to clear the pairing list of this instance of VESC Tool. Are you sure?"),
+                                         tr("Clear paired ESCs"),
+                                         tr("This is going to clear the pairing list of this instance of variESC Tool. Are you sure?"),
                                          QMessageBox::Ok | QMessageBox::Cancel);
             if (reply == QMessageBox::Ok) {
                 mVesc->clearPairedUuids();
@@ -566,8 +566,8 @@ void PageConnection::on_unpairButton_clicked()
     if (mVesc) {
         if (mVesc->isPortConnected()) {
             if (mVesc->commands()->isLimitedMode()) {
-                mVesc->emitMessageDialog("Unpair VESC",
-                                         "The fiwmare must be updated on this VESC first.",
+                mVesc->emitMessageDialog("Unpair ESC",
+                                         "The fiwmare must be updated on this ESC first.",
                                          false, false);
             } else {
                 QListWidgetItem *item = ui->pairedListWidget->currentItem();
@@ -575,8 +575,8 @@ void PageConnection::on_unpairButton_clicked()
                 if (item) {
                     QMessageBox::StandardButton reply;
                     reply = QMessageBox::warning(this,
-                                                 tr("Unpair connected VESC"),
-                                                 tr("This is going to unpair the connected VESC. Continue?"),
+                                                 tr("Unpair connected ESC"),
+                                                 tr("This is going to unpair the connected ESC. Continue?"),
                                                  QMessageBox::Ok | QMessageBox::Cancel);
                     if (reply == QMessageBox::Ok) {
                         ConfigParams *ap = mVesc->appConfig();
@@ -593,8 +593,8 @@ void PageConnection::on_unpairButton_clicked()
                 }
             }
         } else {
-            mVesc->emitMessageDialog("Unpair VESC",
-                                     "You are not connected to the VESC. Connect in order to unpair it.",
+            mVesc->emitMessageDialog("Unpair ESC",
+                                     "You are not connected to the ESC. Connect in order to unpair it.",
                                      false, false);
         }
     }

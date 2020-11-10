@@ -67,7 +67,7 @@ void PageTerminal::on_sendButton_clicked()
         ui->terminalEdit->clear();
     }
     else {
-        ui->terminalBrowser->append("VESC not connected");
+        ui->terminalBrowser->append("ESC not connected");
     }
 
     ui->terminalEdit->setFocus();

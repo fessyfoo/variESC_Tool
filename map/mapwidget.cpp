@@ -1163,7 +1163,7 @@ void MapWidget::printPdf(QString path, int width, int height)
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setColorMode(QPrinter::Color);
 
-    printer.printEngine()->setProperty(QPrintEngine::PPK_Creator, "VESC Tool");
+    printer.printEngine()->setProperty(QPrintEngine::PPK_Creator, "variESC Tool");
     printer.printEngine()->setProperty(QPrintEngine::PPK_DocumentName, "Map");
 
     QPageLayout pageLayout;

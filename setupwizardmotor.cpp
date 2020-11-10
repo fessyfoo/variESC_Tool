@@ -71,9 +71,9 @@ IntroPage::IntroPage(VescInterface *vesc, QWidget *parent)
     : QWizardPage(parent)
 {
     mVesc = vesc;
-    setTitle(tr("VESC® Motor Setup Wizard"));
+    setTitle(tr("variESC Motor Setup Wizard"));
 
-    mLabel = new QLabel(tr("This wizard will guide you through the motor setup of the VESC® "
+    mLabel = new QLabel(tr("This wizard will guide you through the motor setup of the ESC "
                            "step by step. Notice that only the required options for "
                            "getting the motor running are shown. For tweaking the advanced "
                            "settings, the configuration pages have to be entered after "
@@ -83,7 +83,7 @@ IntroPage::IntroPage(VescInterface *vesc, QWidget *parent)
                            "wizard, click on the questionmark next to them.<br><br>"
                            ""
                            "After finishing the motor setup, you can use the input setup wizard "
-                           "to configure the apps for input to the VESC."));
+                           "to configure the apps for input to the ESC."));
     mLabel->setWordWrap(true);
 
     QVBoxLayout *layout = new QVBoxLayout;
@@ -112,9 +112,9 @@ bool IntroPage::validatePage()
         QMessageBox::StandardButton reply;
         reply = QMessageBox::information(this,
                                          tr("Connection"),
-                                         tr("You are not connected to the VESC. Would you like to try to automatically connect?<br><br>"
+                                         tr("You are not connected to the ESC. Would you like to try to automatically connect?<br><br>"
                                             ""
-                                            "<i>Notice that the USB cable must be plugged in and that the VESC "
+                                            "<i>Notice that the USB cable must be plugged in and that the ESC "
                                             "must be powered for the connection to work.</i>"),
                                          QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
@@ -132,8 +132,8 @@ ConnectionPage::ConnectionPage(VescInterface *vesc, QWidget *parent)
 {
     mVesc = vesc;
 
-    setTitle(tr("Connect VESC"));
-    setSubTitle(tr("The VESC has to be connected in order to use this "
+    setTitle(tr("Connect ESC"));
+    setSubTitle(tr("The ESC has to be connected in order to use this "
                    "wizard. Please connect using one of the available "
                    "interfaces."));
 
@@ -168,8 +168,8 @@ FirmwarePage::FirmwarePage(VescInterface *vesc, QWidget *parent)
     mVesc = vesc;
 
     setTitle(tr("Update Firmware"));
-    setSubTitle(tr("You need to update the firmware on the VESC in order "
-                   "to use it with this version of VESC Tool."));
+    setSubTitle(tr("You need to update the firmware on the ESC in order "
+                   "to use it with this version of variESC Tool."));
 
     mPageFirmware = new PageFirmware;
     mPageFirmware->setVesc(mVesc);
@@ -243,7 +243,7 @@ void MotorTypePage::showEvent(QShowEvent *event)
         reply = QMessageBox::information(this,
                                          tr("Load Default Configuration"),
                                          tr("Would you like to load the default configuration from "
-                                            "the connected VESC before proceeding with the setup?"),
+                                            "the connected ESC before proceeding with the setup?"),
                                          QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
         if (reply == QMessageBox::Yes) {
@@ -274,7 +274,7 @@ CurrentsPage::CurrentsPage(VescInterface *vesc, QWidget *parent)
     mConfigureBatteryCutoff = true;
 
     mLabel = new QLabel(tr("<font color=\"red\">WARNING: </font>"
-                           "Using too high current settings can damage the motor, the VESC "
+                           "Using too high current settings can damage the motor, the ESC "
                            "and/or the battery. Make sure to read the specifications of your "
                            "system if you are not sure about how to configure the current limits."));
     mLabel->setWordWrap(true);
@@ -319,7 +319,7 @@ void CurrentsPage::showEvent(QShowEvent *event)
         QMessageBox::warning(this,
                              tr("Important Notice"),
                              tr("You are about to configure the current limits. Keep in mind that "
-                                "using too high current settings can damage the motor, the VESC "
+                                "using too high current settings can damage the motor, the ESC "
                                 "and/or the battery. Make sure to read the specifications of your "
                                 "system if you are not sure about how to configure the current limits."));
 
@@ -624,7 +624,7 @@ bool FocPage::validatePage()
                      "<br><br>"
                      "<font color=\"red\">WARNING: </font>"
                      "Using the wrong motor parameters will most likely damage your "
-                     "VESC and/or motor. Answering <b>No</b> and applying the dection result "
+                     "ESC and/or motor. Answering <b>No</b> and applying the dection result "
                      "is recommended.");
         } else {
             msg = tr("You have not finished the detection. Would you like to continue "
@@ -632,7 +632,7 @@ bool FocPage::validatePage()
                      "<br><br>"
                      "<font color=\"red\">WARNING: </font>"
                      "Using the wrong motor parameters will most likely damage your "
-                     "VESC and/or motor. Answering <b>No</b> and finishing the detection "
+                     "ESC and/or motor. Answering <b>No</b> and finishing the detection "
                      "is recommended.");
         }
 
@@ -731,9 +731,9 @@ ConclusionPage::ConclusionPage(VescInterface *vesc, QWidget *parent)
     mVesc = vesc;
     setTitle(tr("Conclusion"));
 
-    mLabel = new QLabel(tr("You have finished the motor setup for the VESC®. The next step "
+    mLabel = new QLabel(tr("You have finished the motor setup for the ESC. The next step "
                            "is to run the app setup to configure what type of interface "
-                           "to use with your VESC."));
+                           "to use with your ESC."));
     mLabel->setWordWrap(true);
 
     QVBoxLayout *layout = new QVBoxLayout;

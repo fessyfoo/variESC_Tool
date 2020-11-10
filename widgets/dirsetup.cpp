@@ -61,7 +61,7 @@ void DirSetup::scanVescs()
 
         if (!mVesc->isPortConnected()) {
             mVesc->emitMessageDialog("Direction Setup",
-                                     "You are not connected to the VESC. Connect in order to run direction setup.",
+                                     "You are not connected to the ESC. Connect in order to run direction setup.",
                                      false, false);
             return;
         }
@@ -133,11 +133,11 @@ void DirSetup::scanVescs()
 
         QVBoxLayout *l = new QVBoxLayout;
         l->setSpacing(4);
-        l->addWidget(addViewer(QString("Local VESC"), -1));
+        l->addWidget(addViewer(QString("Local ESC"), -1));
 
         auto canDevs = Utility::scanCanVescOnly(mVesc);
         for (auto d: canDevs) {
-            l->addWidget(addViewer(QString("CAN VESC\nID: %1").arg(d), d));
+            l->addWidget(addViewer(QString("CAN ESC\nID: %1").arg(d), d));
         }
 
         l->addStretch();

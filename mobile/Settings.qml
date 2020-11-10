@@ -34,7 +34,7 @@ Item {
         standardButtons: Dialog.Close
         modal: true
         focus: true
-        title: "VESC Tool Settings"
+        title: "variESC Tool Settings"
 
         width: parent.width - 20
         closePolicy: Popup.CloseOnEscape

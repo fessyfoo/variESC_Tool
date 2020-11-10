@@ -232,7 +232,7 @@ void DetectAllFocDialog::runDetect(bool can)
 {
     if (!mVesc->isPortConnected()) {
         mVesc->emitMessageDialog("Error",
-                                 "The VESC is not connected. Please connect and try again.",
+                                 "The ESC is not connected. Please connect and try again.",
                                  false, false);
         return;
     }

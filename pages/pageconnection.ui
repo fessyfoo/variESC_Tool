@@ -178,7 +178,7 @@
          <item>
           <widget class="QLabel" name="label_5">
            <property name="text">
-            <string>VESC ID</string>
+            <string>ESC ID</string>
            </property>
           </widget>
          </item>
@@ -191,7 +191,7 @@
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>Discovered VESC nodes in the bus</string>
+            <string>Discovered ESC nodes in the bus</string>
            </property>
           </widget>
          </item>
@@ -229,7 +229,7 @@
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>Discover VESC nodes in the CAN bus</string>
+            <string>Discover ESC nodes in the CAN bus</string>
            </property>
            <property name="text">
             <string>Scan</string>
@@ -272,7 +272,7 @@
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>Connect to a VESC node</string>
+            <string>Connect to a ESC node</string>
            </property>
            <property name="text">
             <string/>
@@ -712,7 +712,7 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Paired VESCs</string>
+          <string>Paired ESCs</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
@@ -728,7 +728,7 @@
               <item>
                <widget class="QPushButton" name="pairConnectedButton">
                 <property name="toolTip">
-                 <string>Pair the connected VESC</string>
+                 <string>Pair the connected ESC</string>
                 </property>
                 <property name="text">
                  <string>Pair</string>
@@ -742,7 +742,7 @@
               <item>
                <widget class="QPushButton" name="addConnectedButton">
                 <property name="toolTip">
-                 <string>Add the connected VESC without pairing it.</string>
+                 <string>Add the connected ESC without pairing it.</string>
                 </property>
                 <property name="text">
                  <string>Add</string>
@@ -756,7 +756,7 @@
               <item>
                <widget class="QPushButton" name="addUuidButton">
                 <property name="toolTip">
-                 <string>Manuallt add UUID to this instance of VESC Tool</string>
+                 <string>Manuallt add UUID to this instance of variESC Tool</string>
                 </property>
                 <property name="text">
                  <string>Add UUID</string>
@@ -773,7 +773,7 @@
               <item>
                <widget class="QPushButton" name="unpairButton">
                 <property name="toolTip">
-                 <string>Unpair this VESC, and make it possible to connect to it from any VESC Tool instance.</string>
+                 <string>Unpair this ESC, and make it possible to connect to it from any variESC Tool instance.</string>
                 </property>
                 <property name="text">
                  <string>Unpair</string>

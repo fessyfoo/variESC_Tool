@@ -35,7 +35,7 @@ static void showHelp()
 {
     qDebug() << "Arguments";
     qDebug() << "-h, --help : Show help text";
-    qDebug() << "--tcpServer [port] : Autoconnect to VESC and start TCP server on [port]";
+    qDebug() << "--tcpServer [port] : Autoconnect to ESC and start TCP server on [port]";
 }
 
 #ifdef Q_OS_LINUX
@@ -50,9 +50,9 @@ static void m_cleanup(int sig)
 int main(int argc, char *argv[])
 {
     // Settings
-    QCoreApplication::setOrganizationName("VESC");
-    QCoreApplication::setOrganizationDomain("vesc-project.com");
-    QCoreApplication::setApplicationName("VESC Tool");
+    QCoreApplication::setOrganizationName("ESC");
+    QCoreApplication::setOrganizationDomain("variESC.com");
+    QCoreApplication::setApplicationName("variESC Tool");
 
     // DPI settings
     // TODO: http://www.qcustomplot.com/index.php/support/forum/1344
@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
                     qApp->quit();
                 }
             } else {
-                qCritical() << "Could not autoconnect to VESC";
+                qCritical() << "Could not autoconnect to ESC";
                 qApp->quit();
             }
         });

@@ -41,7 +41,7 @@ StartupWizard::StartupWizard(VescInterface *vesc, QWidget *parent)
                      Qt::SmoothTransformation));
     resize(800, 450);
 
-    setWindowTitle(tr("VESC Tool Introduction"));
+    setWindowTitle(tr("variESC Tool Introduction"));
 
     mSideLabel = new AspectImgLabel(Qt::Vertical);
     mSideLabel->setPixmap(QPixmap("://res/logo_intro_wizard.png"));

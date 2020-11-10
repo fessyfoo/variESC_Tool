@@ -38,7 +38,7 @@ Item {
         canIdModel.clear()
 
         disableDialog()
-        canIdModel.append({"name": "This VESC",
+        canIdModel.append({"name": "This ESC",
                               "canId": mAppConf.getParamInt("controller_id"),
                               "isCan": false,
                               "isInv": Utility.getInvertDirection(VescIf, -1)})
@@ -46,7 +46,7 @@ Item {
         var canDevs = Utility.scanCanVescOnly(VescIf)
 
         for (var i = 0;i < canDevs.length;i++) {
-            canIdModel.append({"name": "VESC on CAN-bus",
+            canIdModel.append({"name": "ESC on CAN-bus",
                                   "canId": canDevs[i],
                                   "isCan": true,
                                   "isInv": Utility.getInvertDirection(VescIf, canDevs[i])})
@@ -62,7 +62,7 @@ Item {
             id: text
             Layout.fillWidth: true
             color: "white"
-            text: qsTr("Select which VESCs have inverted motor direction. Press the FWD or REV button to try.")
+            text: qsTr("Select which ESCs have inverted motor direction. Press the FWD or REV button to try.")
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap

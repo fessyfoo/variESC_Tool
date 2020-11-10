@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Select which VESCs have inverted motor direction. Press the FWD or REV button to try.</string>
+      <string>Select which ESCs have inverted motor direction. Press the FWD or REV button to try.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

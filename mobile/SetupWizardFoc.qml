@@ -554,7 +554,7 @@ Item {
                                 detectDialog.open()
                             } else {
                                 VescIf.emitMessageDialog("Detect Motors",
-                                                         "Not connected to the VESC. Please connect in order to run detection.",
+                                                         "Not connected to the ESC. Please connect in order to run detection.",
                                                          false, false)
                             }
                         }
@@ -587,7 +587,7 @@ Item {
             verticalAlignment: Text.AlignVCenter
             anchors.fill: parent
             wrapMode: Text.WordWrap
-            text: "Would you like to restore this VESC, and all VESCs on the CAN-bus (if any), " +
+            text: "Would you like to restore this ESC, and all ESCs on the CAN-bus (if any), " +
                   "to their default settings before proceeding?"
         }
 
@@ -648,7 +648,7 @@ Item {
             text: "Warning: You have not specified battery current limits, which essentially only limits " +
                   "the current if the voltage drops too much. This is fine in most cases, but check with " +
                   "your battery and BMS specification to be safe. Keep in mind that you have to divide the " +
-                  "battery current settings by the number of VESCs."
+                  "battery current settings by the number of ESCs."
         }
 
         onAccepted: {

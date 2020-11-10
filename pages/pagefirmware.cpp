@@ -322,7 +322,7 @@ void PageFirmware::uploadFw(bool allOverCan)
         if (!mVesc->isPortConnected()) {
             QMessageBox::critical(this,
                                   tr("Connection Error"),
-                                  tr("The VESC is not connected. Please connect it."));
+                                  tr("The ESC is not connected. Please connect it."));
             return;
         }
 
@@ -336,9 +336,9 @@ void PageFirmware::uploadFw(bool allOverCan)
                 if (ui->hwList->count() == 0) {
                     QMessageBox::warning(this,
                                          tr("Upload Error"),
-                                         tr("This version of VESC Tool does not include any firmware "
+                                         tr("This version of variESC Tool does not include any firmware "
                                             "for your hardware version. You can either "
-                                            "upload a custom file or look for a later version of VESC "
+                                            "upload a custom file or look for a later version of variESC "
                                             "Tool that might support your hardware."));
                 } else {
                     QMessageBox::warning(this,
@@ -369,7 +369,7 @@ void PageFirmware::uploadFw(bool allOverCan)
                 if (ui->blList->count() == 0) {
                     QMessageBox::warning(this,
                                          tr("Upload Error"),
-                                         tr("This version of VESC Tool does not include any bootloader "
+                                         tr("This version of variESC Tool does not include any bootloader "
                                             "for your hardware version."));
                 } else {
                     QMessageBox::warning(this,
@@ -401,7 +401,7 @@ void PageFirmware::uploadFw(bool allOverCan)
         if (ui->fwTabWidget->currentIndex() == 0 && ui->hwList->count() == 1) {
             reply = QMessageBox::warning(this,
                                          tr("Warning"),
-                                         tr("Uploading new firmware will clear all settings on your VESC "
+                                         tr("Uploading new firmware will clear all settings on your ESC "
                                             "and you have to do the configuration again. Do you want to "
                                             "continue?"),
                                          QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
@@ -409,21 +409,21 @@ void PageFirmware::uploadFw(bool allOverCan)
             reply = QMessageBox::warning(this,
                                          tr("Warning"),
                                          tr("Uploading firmware for the wrong hardware version "
-                                            "WILL damage the VESC for sure. Are you sure that you have "
+                                            "WILL damage the ESC for sure. Are you sure that you have "
                                             "chosen the correct hardware version?"),
                                          QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
         } else if (ui->fwTabWidget->currentIndex() == 2) {
             if (mVesc->commands()->getLimitedSupportsEraseBootloader()) {
                 reply = QMessageBox::warning(this,
                                              tr("Warning"),
-                                             tr("This will attempt to upload a bootloader to the connected VESC. "
+                                             tr("This will attempt to upload a bootloader to the connected ESC. "
                                                 "Do you want to continue?"),
                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
             } else {
                 reply = QMessageBox::warning(this,
                                              tr("Warning"),
-                                             tr("This will attempt to upload a bootloader to the connected VESC. "
-                                                "If the connected VESC already has a bootloader this will destroy "
+                                             tr("This will attempt to upload a bootloader to the connected ESC. "
+                                                "If the connected ESC already has a bootloader this will destroy "
                                                 "the bootloader and firmware updates cannot be done anymore. Do "
                                                 "you want to continue?"),
                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
@@ -442,7 +442,7 @@ void PageFirmware::uploadFw(bool allOverCan)
                                      tr("Warning"),
                                      tr("The firmware upload is done. You must wait at least "
                                         "10 seconds before unplugging power. Otherwise the firmware will get corrupted and your "
-                                        "VESC will become bricked. If that happens you need a SWD programmer to recover it."));
+                                        "ESC will become bricked. If that happens you need a SWD programmer to recover it."));
             }
         }
     }

@@ -286,7 +286,7 @@ Item {
             powerGauge.value = (values.current_in * values.v_in)
 
             valText.text =
-                    "VESCs  : " + values.num_vescs + "\n" +
+                    "ESCs  : " + values.num_vescs + "\n" +
                     "mAh Out: " + parseFloat(values.amp_hours * 1000.0).toFixed(1) + "\n" +
                     "mAh In : " + parseFloat(values.amp_hours_charged * 1000.0).toFixed(1)
 

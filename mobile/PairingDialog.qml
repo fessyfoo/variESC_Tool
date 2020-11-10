@@ -62,7 +62,7 @@ Item {
                 id: text
                 Layout.fillWidth: true
                 color: "white"
-                text: qsTr("These are the VESCs paired to this instance of VESC Tool.")
+                text: qsTr("These are the ESCs paired to this instance of variESC Tool.")
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
@@ -129,7 +129,7 @@ Item {
                                     focus: true
                                     width: parent.width - 20
                                     closePolicy: Popup.CloseOnEscape
-                                    title: "Delete paired VESC"
+                                    title: "Delete paired ESC"
                                     x: 10
                                     y: 10 + parent.height / 2 - height / 2
                                     parent: ApplicationWindow.overlay
@@ -139,7 +139,7 @@ Item {
                                         verticalAlignment: Text.AlignVCenter
                                         anchors.fill: parent
                                         wrapMode: Text.WordWrap
-                                        text: "This is going to delete this VESC from the paired list. If that VESC " +
+                                        text: "This is going to delete this ESC from the paired list. If that ESC " +
                                               "has the pairing flag set you won't be able to connect to it over BLE " +
                                               "any more. Are you sure?"
                                     }
@@ -178,7 +178,7 @@ Item {
                                     VescIf.storeSettings()
                                 } else {
                                     VescIf.emitMessageDialog("Add UUID",
-                                                             "You are not connected to the VESC. Connect in order to add it.",
+                                                             "You are not connected to the ESC. Connect in order to add it.",
                                                              false, false)
                                 }
                             }
@@ -196,15 +196,15 @@ Item {
                             onTriggered: {
                                 if (VescIf.isPortConnected()) {
                                     if (mCommands.isLimitedMode()) {
-                                        VescIf.emitMessageDialog("Unpair VESC",
-                                                                 "The fiwmare must be updated to unpair this VESC.",
+                                        VescIf.emitMessageDialog("Unpair ESC",
+                                                                 "The fiwmare must be updated to unpair this ESC.",
                                                                  false, false)
                                     } else {
                                         unpairConnectedDialog.open()
                                     }
                                 } else {
-                                    VescIf.emitMessageDialog("Unpair VESC",
-                                                             "You are not connected to the VESC. Connect in order to unpair it.",
+                                    VescIf.emitMessageDialog("Unpair ESC",
+                                                             "You are not connected to the ESC. Connect in order to unpair it.",
                                                              false, false)
                                 }
                             }
@@ -214,20 +214,20 @@ Item {
 
                 Button {
                     id: pairConnectedButton
-                    text: "Pair VESC"
+                    text: "Pair ESC"
                     Layout.fillWidth: true
                     onClicked: {
                         if (VescIf.isPortConnected()) {
                             if (mCommands.isLimitedMode()) {
-                                VescIf.emitMessageDialog("Pair VESC",
-                                                         "The fiwmare must be updated to pair this VESC.",
+                                VescIf.emitMessageDialog("Pair ESC",
+                                                         "The fiwmare must be updated to pair this ESC.",
                                                          false, false)
                             } else {
                                 pairConnectedDialog.open()
                             }
                         } else {
-                            VescIf.emitMessageDialog("Pair VESC",
-                                                     "You are not connected to the VESC. Connect in order to pair it.",
+                            VescIf.emitMessageDialog("Pair ESC",
+                                                     "You are not connected to the ESC. Connect in order to pair it.",
                                                      false, false)
                         }
                     }
@@ -252,7 +252,7 @@ Item {
         focus: true
         width: parent.width - 20
         closePolicy: Popup.CloseOnEscape
-        title: "Pair connected VESC"
+        title: "Pair connected ESC"
         x: 10
         y: 10 + Math.max((parent.height - height) / 2, 10)
         parent: ApplicationWindow.overlay
@@ -262,8 +262,8 @@ Item {
             verticalAlignment: Text.AlignVCenter
             anchors.fill: parent
             wrapMode: Text.WordWrap
-            text: "This is going to pair the connected VESC with this instance of VESC Tool. VESC Tool instances " +
-                  "that are not paired with this VESC will not be able to connect over bluetooth any more. Continue?"
+            text: "This is going to pair the connected ESC with this instance of variESC Tool. variESC Tool instances " +
+                  "that are not paired with this ESC will not be able to connect over bluetooth any more. Continue?"
         }
 
         onAccepted: {
@@ -273,8 +273,8 @@ Item {
             mCommands.setAppConf()
             if (Utility.waitSignal(mCommands, "2ackReceived(QString)", 2000)) {
                 VescIf.emitMessageDialog("Pairing Successful!",
-                                         "Pairing is done! Please note the UUID if this VESC (or take a screenshot) in order " +
-                                         "to add it to VESC Tool instances that are not paired in the future. The UUID is:\n" +
+                                         "Pairing is done! Please note the UUID if this ESC (or take a screenshot) in order " +
+                                         "to add it to variESC Tool instances that are not paired in the future. The UUID is:\n" +
                                          VescIf.getConnectedUuid(),
                                          true, false)
             }
@@ -289,7 +289,7 @@ Item {
         focus: true
         width: parent.width - 20
         closePolicy: Popup.CloseOnEscape
-        title: "Unpair connected VESC"
+        title: "Unpair connected ESC"
         x: 10
         y: 10 + parent.height / 2 - height / 2
         parent: ApplicationWindow.overlay
@@ -299,7 +299,7 @@ Item {
             verticalAlignment: Text.AlignVCenter
             anchors.fill: parent
             wrapMode: Text.WordWrap
-            text: "This is going to unpair the connected VESC. Continue?"
+            text: "This is going to unpair the connected ESC. Continue?"
         }
 
         onAccepted: {

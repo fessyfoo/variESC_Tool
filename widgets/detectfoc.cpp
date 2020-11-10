@@ -47,7 +47,7 @@ void DetectFoc::on_rlButton_clicked()
         if (!mVesc->isPortConnected()) {
             QMessageBox::critical(this,
                                   tr("Connection Error"),
-                                  tr("The VESC is not connected. Please connect it."));
+                                  tr("The ESC is not connected. Please connect it."));
             return;
         }
 
@@ -68,7 +68,7 @@ void DetectFoc::on_lambdaButton_clicked()
         if (!mVesc->isPortConnected()) {
             QMessageBox::critical(this,
                                   tr("Connection Error"),
-                                  tr("The VESC is not connected. Please connect it."));
+                                  tr("The ESC is not connected. Please connect it."));
             return;
         }
 

@@ -180,7 +180,7 @@ Item {
                         onClicked: {
                             if (!VescIf.isPortConnected()) {
                                 VescIf.emitMessageDialog("FOC Setup Wizard",
-                                                         "You are not connected to the VESC. Please connect in order " +
+                                                         "You are not connected to the ESC. Please connect in order " +
                                                          "to run this wizard.", false, false)
                             } else {
                                 wizardFoc.openDialog()
@@ -195,7 +195,7 @@ Item {
                         onClicked: {
                             if (!VescIf.isPortConnected()) {
                                 VescIf.emitMessageDialog("Input Setup Wizard",
-                                                         "You are not connected to the VESC. Please connect in order " +
+                                                         "You are not connected to the ESC. Please connect in order " +
                                                          "to run this wizard.", false, false)
                             } else {
                                 // Something in the opendialog function causes a weird glitch, probably
@@ -217,7 +217,7 @@ Item {
                         onClicked: {
                             if (!VescIf.isPortConnected()) {
                                 VescIf.emitMessageDialog("NRF Quick Pair",
-                                                         "You are not connected to the VESC. Please connect in order " +
+                                                         "You are not connected to the ESC. Please connect in order " +
                                                          "to quick pair an NRF-based remote.", false, false)
                             } else {
                                 nrfPairStartDialog.open()
@@ -306,7 +306,7 @@ Item {
                             onClicked: {
                                 canItems.clear()
                                 for (var i = 0;i < 255;i++) {
-                                    var name = "VESC " + i
+                                    var name = "ESC " + i
                                     canItems.append({ key: name, value: i })
                                 }
                                 canIdBox.currentIndex = 0
@@ -367,7 +367,7 @@ Item {
                         onClicked: {
                             if (!VescIf.isPortConnected()) {
                                 VescIf.emitMessageDialog("Directions",
-                                                         "You are not connected to the VESC. Please connect in order " +
+                                                         "You are not connected to the ESC. Please connect in order " +
                                                          "to map directions.", false, false)
                             } else {
                                 enabled = false
@@ -607,7 +607,7 @@ Item {
             anchors.fill: parent
             wrapMode: Text.WordWrap
             text:
-                "After clicking OK the VESC will be put in pairing mode for 10 seconds. Switch" +
+                "After clicking OK the ESC will be put in pairing mode for 10 seconds. Switch" +
                 "on your remote during this time to complete the pairing process."
         }
 
@@ -637,9 +637,9 @@ Item {
             anchors.fill: parent
             wrapMode: Text.WordWrap
             text:
-                "This will backup the configuration of the connected VESC, as well as for the VESCs " +
-                "connected over CAN-bus. The configurations are stored by VESC UUID. If a backup for a " +
-                "VESC UUID already exists it will be overwritten. Continue?"
+                "This will backup the configuration of the connected ESC, as well as for the ESCs " +
+                "connected over CAN-bus. The configurations are stored by ESC UUID. If a backup for a " +
+                "ESC UUID already exists it will be overwritten. Continue?"
         }
 
         onAccepted: {
@@ -668,9 +668,9 @@ Item {
             anchors.fill: parent
             wrapMode: Text.WordWrap
             text:
-                "This will restore the configuration of the connected VESC, as well as the VESCs connected over CAN bus " +
-                "if a backup exists for their UUID in this instance of VESC Tool. If no backup is found for the UUID of " +
-                "the VESCs nothing will be changed. Continue?"
+                "This will restore the configuration of the connected ESC, as well as the ESCs connected over CAN bus " +
+                "if a backup exists for their UUID in this instance of variESC Tool. If no backup is found for the UUID of " +
+                "the ESCs nothing will be changed. Continue?"
         }
 
         onAccepted: {

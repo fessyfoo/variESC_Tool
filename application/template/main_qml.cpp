@@ -45,15 +45,15 @@ QObject *utility_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEng
 int main(int argc, char *argv[])
 {
     // Settings
-    QCoreApplication::setOrganizationName("VESC");
-    QCoreApplication::setOrganizationDomain("vesc-project.com");
-    QCoreApplication::setApplicationName("VESC Application");
+    QCoreApplication::setOrganizationName("variESC");
+    QCoreApplication::setOrganizationDomain("variESC.com");
+    QCoreApplication::setApplicationName("variESC Application");
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    
+
     qmlRegisterSingletonType<VescInterface>("Vedder.vesc.vescinterface", 1, 0, "VescIf", vescinterface_singletontype_provider);
     qmlRegisterSingletonType<Utility>("Vedder.vesc.utility", 1, 0, "Utility", utility_singletontype_provider);
 #ifdef HAS_BLUETOOTH
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 #endif
     qmlRegisterType<Commands>("Vedder.vesc.commands", 1, 0, "Commands");
     qmlRegisterType<ConfigParams>("Vedder.vesc.configparams", 1, 0, "ConfigParams");
-    
+
     engine.load(QUrl(QLatin1String("qrc:/res/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

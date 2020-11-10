@@ -119,7 +119,7 @@ bool Utility::autoconnectBlockingWithProgress(VescInterface *vesc, QWidget *pare
     if (!res) {
         vesc->emitMessageDialog(QObject::tr("Autoconnect"),
                                 QObject::tr("Could not autoconnect. Make sure that the USB cable is plugged in "
-                                            "and that the VESC is powered."),
+                                            "and that the ESC is powered."),
                                 false);
     }
 
@@ -129,7 +129,7 @@ bool Utility::autoconnectBlockingWithProgress(VescInterface *vesc, QWidget *pare
 void Utility::checkVersion(VescInterface *vesc)
 {
     QString version = QString::number(VT_VERSION);
-    QUrl url("https://vesc-project.com/vesctool-version.html");
+    QUrl url("http://variESC.com/esctool-version.html");
     QNetworkAccessManager manager;
     QNetworkRequest request(url);
     QNetworkReply *reply = manager.get(request);
@@ -145,14 +145,14 @@ void Utility::checkVersion(VescInterface *vesc)
 
         if (res.toDouble() > version.toDouble()) {
             if (vesc) {
-                vesc->emitStatusMessage("A new version of VESC Tool is available", true);
+                vesc->emitStatusMessage("A new version of variESC Tool is available", true);
                 vesc->emitMessageDialog(QObject::tr("New Software Available"),
-                                        QObject::tr("A new version of VESC Tool is available. Go to "
-                                                    "<a href=\"http://vesc-project.com/\">http://vesc-project.com/</a>"
+                                        QObject::tr("A new version of variESC Tool is available. Go to "
+                                                    "<a href=\"http://variESC.com/\">http://variESC.com/</a>"
                                                     " to download it and get all the latest features."),
                                         true);
             } else {
-                qDebug() << "A new version of VESC Tool is available. Go to vesc-project.com to download it "
+                qDebug() << "A new version of variESC Tool is available. Go to variESC.com to download it "
                             "and get all the latest features.";
             }
         }
@@ -186,23 +186,9 @@ QString Utility::vescToolChangeLog()
 
 QString Utility::aboutText()
 {
-    return tr("<b>VESC® Tool %1</b><br>"
-          #if defined(VER_ORIGINAL)
-              "Original Version<br>"
-          #elif defined(VER_PLATINUM)
-              "Platinum Version<br>"
-          #elif defined(VER_GOLD)
-              "Gold Version<br>"
-          #elif defined(VER_SILVER)
-              "Silver Version<br>"
-          #elif defined(VER_BRONZE)
-              "Bronze Version<br>"
-          #elif defined(VER_FREE)
-              "Free of Charge Version<br>"
-          #endif
-              "&copy; Benjamin Vedder 2016 - 2020<br>"
-              "<a href=\"mailto:benjamin@vedder.se\">benjamin@vedder.se</a><br>"
-              "<a href=\"https://vesc-project.com/\">https://vesc-project.com/</a>").
+    return tr("<b>variESC Tool %1</b><br>"
+              "variESC Version<br>"
+              "<a href=\"http://variESC.com/\">variESC.com/</a>").
             arg(QString::number(VT_VERSION, 'f', 2));
 }
 
@@ -326,7 +312,7 @@ QString Utility::detectAllFoc(VescInterface *vesc,
     auto conn2 = connect(&pollTimer, &QTimer::timeout,
                         [&pollRes, &loop, &vesc]() {
         if (!vesc->isPortConnected()) {
-            pollRes = "VESC disconnected during detection.";
+            pollRes = "ESC disconnected during detection.";
             loop.quit();
         }
     });
@@ -353,7 +339,7 @@ QString Utility::detectAllFoc(VescInterface *vesc,
                 case 1: sensors = "Encoder"; break;
                 case 2: sensors = "Hall Sensors"; break;
                 default: break; }
-                return QString("VESC ID            : %1\n"
+                return QString("ESC ID            : %1\n"
                                "Motor current      : %2 A\n"
                                "Motor R            : %3 mΩ\n"
                                "Motor L            : %4 µH\n"
@@ -377,7 +363,7 @@ QString Utility::detectAllFoc(VescInterface *vesc,
             vesc->ignoreCanChange(true);
 
             if (!canDevs.empty()) {
-                res += "\n\nVESCs on CAN-bus:";
+                res += "\n\nESCs on CAN-bus:";
             }
 
             for (int id: canDevs) {
@@ -385,7 +371,7 @@ QString Utility::detectAllFoc(VescInterface *vesc,
 
                 if (!checkFwCompatibility(vesc)) {
                     vesc->emitMessageDialog("FW Versions",
-                                            "All VESCs must have the latest firmware to perform this operation.",
+                                            "All ESCs must have the latest firmware to perform this operation.",
                                             false, false);
                     break;
                 }
@@ -449,7 +435,7 @@ bool Utility::resetInputCan(VescInterface *vesc, QVector<int> canIds)
 
     if (!checkFwCompatibility(vesc)) {
         vesc->emitMessageDialog("FW Versions",
-                                "All VESCs must have the latest firmware to perform this operation.",
+                                "All ESCs must have the latest firmware to perform this operation.",
                                 false, false);
         res = false;
         qWarning() << "Incompatible firmware";
@@ -486,14 +472,14 @@ bool Utility::resetInputCan(VescInterface *vesc, QVector<int> canIds)
         }
     }
 
-    // All VESCs on CAN-bus
+    // All ESCs on CAN-bus
     if (res) {
         for (int id: canIds) {
             vesc->commands()->setSendCan(true, id);
 
             if (!checkFwCompatibility(vesc)) {
                 vesc->emitMessageDialog("FW Versions",
-                                        "All VESCs must have the latest firmware to perform this operation.",
+                                        "All ESCs must have the latest firmware to perform this operation.",
                                         false, false);
                 res = false;
             }
@@ -561,7 +547,7 @@ bool Utility::setBatteryCutCan(VescInterface *vesc, QVector<int> canIds,
 
     if (!checkFwCompatibility(vesc)) {
         vesc->emitMessageDialog("FW Versions",
-                                "All VESCs must have the latest firmware to perform this operation.",
+                                "All ESCs must have the latest firmware to perform this operation.",
                                 false, false);
         res = false;
     }
@@ -589,14 +575,14 @@ bool Utility::setBatteryCutCan(VescInterface *vesc, QVector<int> canIds,
         }
     }
 
-    // All VESCs on CAN-bus
+    // All ESCs on CAN-bus
     if (res) {
         for (int id: canIds) {
             vesc->commands()->setSendCan(true, id);
 
             if (!checkFwCompatibility(vesc)) {
                 vesc->emitMessageDialog("FW Versions",
-                                        "All VESCs must have the latest firmware to perform this operation.",
+                                        "All ESCs must have the latest firmware to perform this operation.",
                                         false, false);
                 res = false;
                 break;
@@ -682,7 +668,7 @@ bool Utility::setInvertDirection(VescInterface *vesc, int canId, bool inverted)
 
     if (!checkFwCompatibility(vesc)) {
         vesc->emitMessageDialog("FW Versions",
-                                "All VESCs must have the latest firmware to perform this operation.",
+                                "All ESCs must have the latest firmware to perform this operation.",
                                 false, false);
         res = false;
     }
@@ -723,7 +709,7 @@ bool Utility::getInvertDirection(VescInterface *vesc, int canId)
 
     if (!checkFwCompatibility(vesc)) {
         vesc->emitMessageDialog("FW Versions",
-                                "All VESCs must have the latest firmware to perform this operation.",
+                                "All ESCs must have the latest firmware to perform this operation.",
                                 false, false);
         vesc->commands()->setSendCan(canLastFwd, canLastId);
         vesc->ignoreCanChange(false);
@@ -756,7 +742,7 @@ QString Utility::testDirection(VescInterface *vesc, int canId, double duty, int 
 
     if (!checkFwCompatibility(vesc)) {
         vesc->emitMessageDialog("FW Versions",
-                                "All VESCs must have the latest firmware to perform this operation.",
+                                "All ESCs must have the latest firmware to perform this operation.",
                                 false, false);
         vesc->commands()->setSendCan(canLastFwd, canLastId);
         vesc->ignoreCanChange(false);
@@ -774,7 +760,7 @@ QString Utility::testDirection(VescInterface *vesc, int canId, double duty, int 
     auto conn = connect(&pollTimer, &QTimer::timeout,
                         [&pollRes, &loop, &vesc, &duty, &ms, &timeoutTimer]() {
         if (!vesc->isPortConnected()) {
-            pollRes = "VESC disconnected.";
+            pollRes = "ESC disconnected.";
             loop.quit();
         } else {
             double d = 2.0 * duty * (double)(ms - timeoutTimer.remainingTime()) / (double)ms;
@@ -800,7 +786,7 @@ QString Utility::testDirection(VescInterface *vesc, int canId, double duty, int 
 
 /**
  * @brief Utility::restoreConfAll
- * Restore the VESC configuration to the default values.
+ * Restore the ESC configuration to the default values.
  *
  * @param vesc
  * Pointer to a connected VescInterface instance.
@@ -829,7 +815,7 @@ bool Utility::restoreConfAll(VescInterface *vesc, bool can, bool mc, bool app)
         vesc->commands()->setSendCan(false);
         if (!checkFwCompatibility(vesc)) {
             vesc->emitMessageDialog("FW Versions",
-                                    "All VESCs must have the latest firmware to perform this operation.",
+                                    "All ESCs must have the latest firmware to perform this operation.",
                                     false, false);
             vesc->commands()->setSendCan(canLastFwd, canLastId);
             vesc->ignoreCanChange(false);
@@ -867,7 +853,7 @@ bool Utility::restoreConfAll(VescInterface *vesc, bool can, bool mc, bool app)
 
             if (!checkFwCompatibility(vesc)) {
                 vesc->emitMessageDialog("FW Versions",
-                                        "All VESCs must have the latest firmware to perform this operation.",
+                                        "All ESCs must have the latest firmware to perform this operation.",
                                         false, false);
                 vesc->commands()->setSendCan(canLastFwd, canLastId);
                 vesc->ignoreCanChange(false);
@@ -970,7 +956,7 @@ bool Utility::createParamParserC(VescInterface *vesc, QString filename)
     QString prefix = headerInfo.fileName();
     prefix.chop(2);
 
-    outHeader << "// This file is autogenerated by VESC Tool\n\n";
+    outHeader << "// This file is autogenerated by variESC Tool\n\n";
 
     outHeader << "#ifndef " + headerNameStr + "\n";
     outHeader << "#define " + headerNameStr + "\n\n";
@@ -996,7 +982,7 @@ bool Utility::createParamParserC(VescInterface *vesc, QString filename)
     outHeader << "// " + headerNameStr + "\n";
     outHeader << "#endif\n";
 
-    outSource << "// This file is autogenerated by VESC Tool\n\n";
+    outSource << "// This file is autogenerated by variESC Tool\n\n";
     outSource << "#include \"buffer.h\"\n";
     outSource << "#include \"conf_general.h\"\n";
     outSource << "#include \"" << headerInfo.fileName() << "\"\n\n";
@@ -1081,7 +1067,7 @@ bool Utility::createParamParserC(ConfigParams *params, QString configName, QStri
 
     QString signatureString = QString("%1_SIGNATURE").arg(configName.toUpper());
 
-    outHeader << "// This file is autogenerated by VESC Tool\n\n";
+    outHeader << "// This file is autogenerated by variESC Tool\n\n";
 
     outHeader << "#ifndef " + headerNameStr + "\n";
     outHeader << "#define " + headerNameStr + "\n\n";
@@ -1101,7 +1087,7 @@ bool Utility::createParamParserC(ConfigParams *params, QString configName, QStri
     outHeader << "// " + headerNameStr + "\n";
     outHeader << "#endif\n";
 
-    outSource << "// This file is autogenerated by VESC Tool\n\n";
+    outSource << "// This file is autogenerated by variESC Tool\n\n";
     outSource << "#include \"buffer.h\"\n";
     outSource << "#include \"conf_general.h\"\n";
     outSource << "#include \"" << headerInfo.fileName() << "\"\n\n";
@@ -1166,7 +1152,7 @@ bool Utility::createCompressedConfigC(ConfigParams *params, QString configName, 
 
     QByteArray compressed = params->getCompressedParamsXml();
 
-    outHeader << "// This file is autogenerated by VESC Tool\n\n";
+    outHeader << "// This file is autogenerated by variESC Tool\n\n";
 
     outHeader << "#ifndef " + headerNameStr + "\n";
     outHeader << "#define " + headerNameStr + "\n\n";
@@ -1184,7 +1170,7 @@ bool Utility::createCompressedConfigC(ConfigParams *params, QString configName, 
     outHeader << "// " + headerNameStr + "\n";
     outHeader << "#endif\n";
 
-    outSource << "// This file is autogenerated by VESC Tool\n\n";
+    outSource << "// This file is autogenerated by variESC Tool\n\n";
     outSource << "#include \"" << headerInfo.fileName() << "\"\n\n";
     outSource << "uint8_t data_" << configNameStr << "[" << compressed.size() << "] = {\n\t";
 

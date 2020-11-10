@@ -1,4 +1,4 @@
-Create an application with the VESC Tool backend. Usage:  
+Create an application with the ESC Tool backend. Usage:  
 ```bash
 ./create_app app_name
 ```

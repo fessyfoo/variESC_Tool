@@ -42,13 +42,13 @@ Item {
         mCanIdAtStart = mCommands.getCanSendId()
 
         if (mCommands.getSendCan()) {
-            canIdModel.append({"name": "This VESC (CAN FWD)",
+            canIdModel.append({"name": "This ESC (CAN FWD)",
                                   "canId": mAppConf.getParamInt("controller_id"),
                                   "isCan": true})
             dialog.open()
             canScanBar.value = 100
         } else {
-            canIdModel.append({"name": "This VESC",
+            canIdModel.append({"name": "This ESC",
                                   "canId": mAppConf.getParamInt("controller_id"),
                                   "isCan": false})
             dialog.open()
@@ -56,7 +56,7 @@ Item {
             var canDevs = Utility.scanCanVescOnly(VescIf)
 
             for (var i = 0;i < canDevs.length;i++) {
-                canIdModel.append({"name": "VESC on CAN-bus",
+                canIdModel.append({"name": "ESC on CAN-bus",
                                       "canId": canDevs[i],
                                       "isCan": true})
             }
@@ -129,7 +129,7 @@ Item {
                     Text {
                         Layout.fillWidth: true
                         color: "white"
-                        text: qsTr("Which VESC is the input connected to?")
+                        text: qsTr("Which ESC is the input connected to?")
                         font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         wrapMode: Text.WordWrap
@@ -551,7 +551,7 @@ Item {
                                 paramsConf.addEditorApp("app_ppm_conf.max_erpm_for_dir")
                                 paramsConf.addEditorApp("app_ppm_conf.smart_rev_max_duty")
                                 paramsConf.addEditorApp("app_ppm_conf.smart_rev_ramp_time")
-                                paramsConf.addSeparator("Multiple VESCs over CAN-bus")
+                                paramsConf.addSeparator("Multiple ESCs over CAN-bus")
                                 paramsConf.addEditorApp("app_ppm_conf.tc")
                                 paramsConf.addEditorApp("app_ppm_conf.tc_max_diff")
                             } else if (apptype === 3 || apptype === 6) {
@@ -565,7 +565,7 @@ Item {
                                 paramsConf.addEditorApp("app_chuk_conf.use_smart_rev")
                                 paramsConf.addEditorApp("app_chuk_conf.smart_rev_max_duty")
                                 paramsConf.addEditorApp("app_chuk_conf.smart_rev_ramp_time")
-                                paramsConf.addSeparator("Multiple VESCs over CAN-bus")
+                                paramsConf.addSeparator("Multiple ESCs over CAN-bus")
                                 paramsConf.addEditorApp("app_chuk_conf.tc")
                                 paramsConf.addEditorApp("app_chuk_conf.tc_max_diff")
                             } else if (apptype === 5) {
@@ -578,7 +578,7 @@ Item {
                                 paramsConf.addEditorApp("app_adc_conf.rev_button_inverted")
                                 paramsConf.addEditorApp("app_adc_conf.ramp_time_pos")
                                 paramsConf.addEditorApp("app_adc_conf.ramp_time_neg")
-                                paramsConf.addSeparator("Multiple VESCs over CAN-bus")
+                                paramsConf.addSeparator("Multiple ESCs over CAN-bus")
                                 paramsConf.addEditorApp("app_adc_conf.tc")
                                 paramsConf.addEditorApp("app_adc_conf.tc_max_diff")
                             }
@@ -629,7 +629,7 @@ Item {
             text:
                 "You have chosen NRF input, which requires pairing. To start the " +
                 "pairing process, click ok and then switch on your remote. This " +
-                "will put the VESC in pairing mode for 10 seconds. You can restart " +
+                "will put the ESC in pairing mode for 10 seconds. You can restart " +
                 "the pairing process with the START button in the NRF Pairing box if " +
                 "needed."
         }

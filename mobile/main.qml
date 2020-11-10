@@ -37,7 +37,7 @@ ApplicationWindow {
     visible: true
     width: 500
     height: 850
-    title: qsTr("VESC Tool")
+    title: qsTr("variESC Tool")
 
     Component.onCompleted: {
 //        Utility.checkVersion(VescIf)
@@ -158,7 +158,7 @@ ApplicationWindow {
 
                 onClicked: {
                     VescIf.emitMessageDialog(
-                                "VESC Tool Changelog",
+                                "variESC Tool Changelog",
                                 Utility.vescToolChangeLog(),
                                 true, false)
                 }

@@ -83,10 +83,10 @@ AppIntroPage::AppIntroPage(VescInterface *vesc, QWidget *parent)
     : QWizardPage(parent)
 {
     mVesc = vesc;
-    setTitle(tr("VESC® Input Setup Wizard"));
+    setTitle(tr("ESC Input Setup Wizard"));
 
     mLabel = new QLabel(tr("This wizard will help you choose what type of input to use "
-                           "for your VESC®, and set up the apps according to your input."
+                           "for your ESC, and set up the apps according to your input."
                            "<br><br>"
                            "To get more information about the parameters and tools in the "
                            "wizard, click on the questionmark next to them."));
@@ -123,10 +123,10 @@ bool AppIntroPage::validatePage()
         QMessageBox::StandardButton reply;
         reply = QMessageBox::information(this,
                                          tr("Connection"),
-                                         tr("You are not connected to the VESC. Would you like to try to "
+                                         tr("You are not connected to the ESC. Would you like to try to "
                                             "automatically connect?<br><br>"
                                             ""
-                                            "<i>Notice that the USB cable must be plugged in and that the VESC "
+                                            "<i>Notice that the USB cable must be plugged in and that the ESC "
                                             "must be powered for the connection to work.</i>"),
                                          QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 
@@ -157,8 +157,8 @@ AppConnectionPage::AppConnectionPage(VescInterface *vesc, QWidget *parent)
 {
     mVesc = vesc;
 
-    setTitle(tr("Connect VESC"));
-    setSubTitle(tr("The VESC has to be connected in order to use this "
+    setTitle(tr("Connect ESC"));
+    setSubTitle(tr("The ESC has to be connected in order to use this "
                    "wizard. Please connect using one of the available "
                    "interfaces."));
 
@@ -193,10 +193,10 @@ AppFirmwarePage::AppFirmwarePage(VescInterface *vesc, QWidget *parent)
     mVesc = vesc;
 
     setTitle(tr("Update Firmware"));
-    setSubTitle(tr("You need to update the firmware on the VESC in order "
-                   "to use it with this version of VESC Tool."));
+    setSubTitle(tr("You need to update the firmware on the ESC in order "
+                   "to use it with this version of variESC Tool."));
 
-    mLabel = new QLabel(tr("Your VESC (or one of the VESCs on the CAN-bus) has old firmware, "
+    mLabel = new QLabel(tr("Your ESC (or one of the ESCs on the CAN-bus) has old firmware, "
                            "and needs to be updated. After that, "
                            "the motor configuration has to be done again."));
 
@@ -217,8 +217,8 @@ AppMultiPage::AppMultiPage(VescInterface *vesc, QWidget *parent)
 {
     mVesc = vesc;
 
-    setTitle(tr("Multiple VESCs"));
-    setSubTitle(tr("Found multiple VESCs on the CAN-bus, choose "
+    setTitle(tr("Multiple ESCs"));
+    setSubTitle(tr("Found multiple ESCs on the CAN-bus, choose "
                    "which one the input is connected to."));
 
     mCanFwdList = new QListWidget;
@@ -240,7 +240,7 @@ void AppMultiPage::initializePage()
     mCanFwdList->clear();
 
     QListWidgetItem *item = new QListWidgetItem;
-    item->setText(tr("This VESC (ID: %1)").
+    item->setText(tr("This ESC (ID: %1)").
                   arg(mVesc->appConfig()->getParamInt("controller_id")));
     item->setIcon(QIcon("://res/icons/Connected-96.png"));
     item->setData(Qt::UserRole, -1);
@@ -248,7 +248,7 @@ void AppMultiPage::initializePage()
 
     for (int dev: mVesc->getCanDevsLast()) {
         item = new QListWidgetItem;
-        item->setText(tr("VESC with ID: %1").arg(dev));
+        item->setText(tr("ESC with ID: %1").arg(dev));
         item->setIcon(QIcon("://res/icons/can_off.png"));
         item->setData(Qt::UserRole, dev);
         mCanFwdList->addItem(item);
@@ -297,7 +297,7 @@ AppGeneralPage::AppGeneralPage(VescInterface *vesc, QWidget *parent)
     mVesc = vesc;
 
     setTitle(tr("Choose App"));
-    setSubTitle(tr("Choose what type of input you want to control this VESC with."));
+    setSubTitle(tr("Choose what type of input you want to control this ESC with."));
 
     mInputList = new QListWidget;
     QListWidgetItem *item = new QListWidgetItem;
@@ -434,14 +434,14 @@ void AppNunchukPage::initializePage()
     mParamTab->addParamRow(mVesc->appConfig(), "app_chuk_conf.smart_rev_max_duty");
     mParamTab->addParamRow(mVesc->appConfig(), "app_chuk_conf.smart_rev_ramp_time");
 
-    mParamTab->addRowSeparator(tr("Multiple VESCs over CAN-bus"));
+    mParamTab->addRowSeparator(tr("Multiple ESCs over CAN-bus"));
     mParamTab->addParamRow(mVesc->appConfig(), "app_chuk_conf.tc");
     mParamTab->addParamRow(mVesc->appConfig(), "app_chuk_conf.tc_max_diff");
     mVesc->appConfig()->updateParamBool("app_chuk_conf.multi_esc", true);
 
     if (field("Input").toInt() == SetupWizardApp::Input_Nunchuk) {
         setSubTitle(tr("Configure your nyko kama nunchuk."));
-        mNrfPair->setVisible(false);        
+        mNrfPair->setVisible(false);
         mVesc->appConfig()->updateParamEnum("app_to_use", 6);
         mVesc->commands()->setAppConf();
         Utility::waitSignal(mVesc->commands(), SIGNAL(ackReceived(QString)), 2000);
@@ -612,7 +612,7 @@ void AppPpmPage::initializePage()
     mParamTab->addParamRow(mVesc->appConfig(), "app_ppm_conf.smart_rev_max_duty");
     mParamTab->addParamRow(mVesc->appConfig(), "app_ppm_conf.smart_rev_ramp_time");
 
-    mParamTab->addRowSeparator(tr("Multiple VESCs over CAN-bus"));
+    mParamTab->addRowSeparator(tr("Multiple ESCs over CAN-bus"));
     mParamTab->addParamRow(mVesc->appConfig(), "app_ppm_conf.tc");
     mParamTab->addParamRow(mVesc->appConfig(), "app_ppm_conf.tc_max_diff");
     mVesc->appConfig()->updateParamBool("app_ppm_conf.multi_esc", true);
@@ -758,7 +758,7 @@ void AppAdcPage::initializePage()
     mParamTab->addParamRow(mVesc->appConfig(), "app_adc_conf.ramp_time_pos");
     mParamTab->addParamRow(mVesc->appConfig(), "app_adc_conf.ramp_time_neg");
 
-    mParamTab->addRowSeparator(tr("Multiple VESCs over CAN-bus"));
+    mParamTab->addRowSeparator(tr("Multiple ESCs over CAN-bus"));
     mParamTab->addParamRow(mVesc->appConfig(), "app_adc_conf.tc");
     mParamTab->addParamRow(mVesc->appConfig(), "app_adc_conf.tc_max_diff");
     mVesc->appConfig()->updateParamBool("app_adc_conf.multi_esc", true);

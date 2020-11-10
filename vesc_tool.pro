@@ -63,12 +63,7 @@ win32: {
 }
 
 # Options
-#CONFIG += build_original
-#CONFIG += build_platinum
-#CONFIG += build_gold
-#CONFIG += build_silver
-#CONFIG += build_bronze
-#CONFIG += build_free
+#CONFIG += build_vari
 
 QT       += core gui
 QT       += widgets
@@ -99,8 +94,8 @@ contains(DEFINES, HAS_GAMEPAD) {
 
 android: QT += androidextras
 
-android: TARGET = vesc_tool
-!android: TARGET = vesc_tool_$$VT_VERSION
+android: TARGET = esc_tool
+!android: TARGET = esc_tool_$$VT_VERSION
 
 ANDROID_VERSION = 1
 
@@ -217,34 +212,10 @@ RESOURCES += res.qrc \
     res_qml.qrc
 RESOURCES += res_config.qrc
 
-build_original {
-    RESOURCES += res_original.qrc \
-    res_fw_original.qrc
+build_vari {
+    RESOURCES += res_vari.qrc \
+    res_fw.qrc
     DEFINES += VER_ORIGINAL
-} else:build_platinum {
-    RESOURCES += res_platinum.qrc \
-    res_fw.qrc
-    DEFINES += VER_PLATINUM
-} else:build_gold {
-    RESOURCES += res_gold.qrc \
-    res_fw.qrc
-    DEFINES += VER_GOLD
-} else:build_silver {
-    RESOURCES += res_silver.qrc \
-    res_fw.qrc
-    DEFINES += VER_SILVER
-} else:build_bronze {
-    RESOURCES += res_bronze.qrc \
-    res_fw.qrc
-    DEFINES += VER_BRONZE
-} else:build_free {
-    RESOURCES += res_free.qrc \
-    res_fw.qrc
-    DEFINES += VER_FREE
-} else {
-    RESOURCES += res_neutral.qrc \
-    res_fw.qrc
-    DEFINES += VER_NEUTRAL
 }
 
 DISTFILES += \

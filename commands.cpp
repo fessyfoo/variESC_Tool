@@ -1338,7 +1338,7 @@ void Commands::pingCan()
  * >0: Amount of milliseconds to disable output
  *
  * @param fwdCan
- * Broadcast the command on the CAN-bus, to affect all VESCs.
+ * Broadcast the command on the CAN-bus, to affect all ESCs.
  */
 void Commands::disableAppOutput(int time_ms, bool fwdCan)
 {

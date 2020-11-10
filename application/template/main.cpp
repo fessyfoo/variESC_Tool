@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 {
     // Settings
     QCoreApplication::setOrganizationName("VESC");
-    QCoreApplication::setOrganizationDomain("vesc-project.com");
+    QCoreApplication::setOrganizationDomain("variESC.com");
     QCoreApplication::setApplicationName("VESC Application");
 
     QApplication a(argc, argv);
