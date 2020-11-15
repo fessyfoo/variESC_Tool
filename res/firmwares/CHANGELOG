@@ -138,7 +138,7 @@
 * Added app template.
 * Added function to unregister terminal callbacks.
 * Added BMI160 support.
-* Added support for the ESC HD.
+* Added support for the VESC HD.
 * Added support for SWD programming permanent NRF.
 * Encoder SW SPI fix.
 * Slightly faster boot.
@@ -389,7 +389,7 @@
 * Moved sampling buffers to CCM to free some RAM.
 * Added hardware info terminal command.
 * NRF init SPI check fix.
-* Sampled data is now transmitted in floating point with scaling done at the ESC. This avoids hard-coded scaling in VESC Tool.
+* Sampled data is now transmitted in floating point with scaling done at the VESC. This avoids hard-coded scaling in VESC Tool.
 
 === FW 3.18 ===
 * NRF init SPI check.
