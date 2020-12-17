@@ -22,6 +22,7 @@
         <file>res/firmwares/100_250/VESC_default_no_hw_limits.bin</file>
         <file>res/firmwares/UNITY/VESC_default.bin</file>
         <file>res/firmwares/UNITY/VESC_default_no_hw_limits.bin</file>
+        <file>res/firmwares/UNITY/VESC_parallel_super_single.bin</file>
         <file>res/firmwares/STORMCORE_60D/VESC_default.bin</file>
         <file>res/firmwares/STORMCORE_60D/VESC_default_no_hw_limits.bin</file>
         <file>res/firmwares/STORMCORE_100D/VESC_default.bin</file>
