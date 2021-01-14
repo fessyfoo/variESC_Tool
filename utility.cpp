@@ -148,11 +148,11 @@ void Utility::checkVersion(VescInterface *vesc)
                 vesc->emitStatusMessage("A new version of variESC Tool is available", true);
                 vesc->emitMessageDialog(QObject::tr("New Software Available"),
                                         QObject::tr("A new version of variESC Tool is available. Go to "
-                                                    "<a href=\"http://variESC.com/\">http://variESC.com/</a>"
+                                                    "<a href=\"https://github.com/variESC/variESC_Tool/releases/latest/\">https://github.com/variESC/variESC_Tool/releases/latest/</a>"
                                                     " to download it and get all the latest features."),
                                         true);
             } else {
-                qDebug() << "A new version of variESC Tool is available. Go to variESC.com to download it "
+                qDebug() << "A new version of variESC Tool is available. Go to <a href=\"https://github.com/variESC/variESC_Tool/releases/latest/\">https://github.com/variESC/variESC_Tool/releases/latest/</a> to download it "
                             "and get all the latest features.";
             }
         }
@@ -188,7 +188,7 @@ QString Utility::aboutText()
 {
     return tr("<b>variESC Tool %1</b><br>"
               "variESC Version<br>"
-              "<a href=\"http://variESC.com/\">variESC.com/</a>").
+              "<a href=\"https://github.com/variESC/variESC_Tool/releases/latest/\">https://github.com/variESC/variESC_Tool/releases/latest/</a>").
             arg(QString::number(VT_VERSION, 'f', 2));
 }
 
